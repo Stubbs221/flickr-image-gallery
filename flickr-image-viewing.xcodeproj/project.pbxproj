@@ -9,21 +9,31 @@
 /* Begin PBXBuildFile section */
 		042E3A4E28A29ABC00D50AC3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042E3A4D28A29ABC00D50AC3 /* AppDelegate.swift */; };
 		042E3A5028A29ABC00D50AC3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042E3A4F28A29ABC00D50AC3 /* SceneDelegate.swift */; };
-		042E3A5228A29ABC00D50AC3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042E3A5128A29ABC00D50AC3 /* ViewController.swift */; };
-		042E3A5528A29ABC00D50AC3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 042E3A5328A29ABC00D50AC3 /* Main.storyboard */; };
 		042E3A5728A29ABD00D50AC3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 042E3A5628A29ABD00D50AC3 /* Assets.xcassets */; };
 		042E3A5A28A29ABD00D50AC3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 042E3A5828A29ABD00D50AC3 /* LaunchScreen.storyboard */; };
+		042E3A6E28A2AC5900D50AC3 /* PhotoFeedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042E3A6D28A2AC5900D50AC3 /* PhotoFeedController.swift */; };
+		042E3A7028A2ACF000D50AC3 /* Extension + PhotoFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042E3A6F28A2ACF000D50AC3 /* Extension + PhotoFeedView.swift */; };
+		042E3A7228A3AC5100D50AC3 /* PhotoFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042E3A7128A3AC5100D50AC3 /* PhotoFeedView.swift */; };
+		042E3A7428A3D7C300D50AC3 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042E3A7328A3D7C300D50AC3 /* NetworkService.swift */; };
+		042E3A7628A3D8C200D50AC3 /* PhotoFeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042E3A7528A3D8C200D50AC3 /* PhotoFeedModel.swift */; };
+		DA3B4605CB926A06865610A1 /* Pods_flickr_image_viewing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F49A82CBAF9D093BA7A4CCD /* Pods_flickr_image_viewing.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		042E3A4A28A29ABC00D50AC3 /* flickr-image-viewing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "flickr-image-viewing.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		042E3A4D28A29ABC00D50AC3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		042E3A4F28A29ABC00D50AC3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		042E3A5128A29ABC00D50AC3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		042E3A5428A29ABC00D50AC3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		042E3A5628A29ABD00D50AC3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		042E3A5928A29ABD00D50AC3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		042E3A5B28A29ABD00D50AC3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		042E3A6D28A2AC5900D50AC3 /* PhotoFeedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoFeedController.swift; sourceTree = "<group>"; };
+		042E3A6F28A2ACF000D50AC3 /* Extension + PhotoFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + PhotoFeedView.swift"; sourceTree = "<group>"; };
+		042E3A7128A3AC5100D50AC3 /* PhotoFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoFeedView.swift; sourceTree = "<group>"; };
+		042E3A7328A3D7C300D50AC3 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		042E3A7528A3D8C200D50AC3 /* PhotoFeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoFeedModel.swift; sourceTree = "<group>"; };
+		3F49A82CBAF9D093BA7A4CCD /* Pods_flickr_image_viewing.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_flickr_image_viewing.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		833AEFDDD89D0A55B361FFB1 /* Pods-flickr-image-viewing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-flickr-image-viewing.release.xcconfig"; path = "Target Support Files/Pods-flickr-image-viewing/Pods-flickr-image-viewing.release.xcconfig"; sourceTree = "<group>"; };
+		C07F49759201662808A6DCF4 /* Pods-flickr-image-viewing.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-flickr-image-viewing.debug.xcconfig"; path = "Target Support Files/Pods-flickr-image-viewing/Pods-flickr-image-viewing.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA3B4605CB926A06865610A1 /* Pods_flickr_image_viewing.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +53,8 @@
 			children = (
 				042E3A4C28A29ABC00D50AC3 /* flickr-image-viewing */,
 				042E3A4B28A29ABC00D50AC3 /* Products */,
+				B4DF3C4BCED9A62E31C1400C /* Pods */,
+				5FD4B3300CCD47DD065D0C6C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,15 +69,123 @@
 		042E3A4C28A29ABC00D50AC3 /* flickr-image-viewing */ = {
 			isa = PBXGroup;
 			children = (
+				042E3A6C28A2A90700D50AC3 /* NetworkLayer */,
+				042E3A6B28A2A5BC00D50AC3 /* Extensions */,
+				042E3A6A28A2A59300D50AC3 /* DependenciesBuilder */,
+				042E3A6228A2A51F00D50AC3 /* FullImageModule */,
+				042E3A6128A2A50400D50AC3 /* PhotoFeedModule */,
 				042E3A4D28A29ABC00D50AC3 /* AppDelegate.swift */,
 				042E3A4F28A29ABC00D50AC3 /* SceneDelegate.swift */,
-				042E3A5128A29ABC00D50AC3 /* ViewController.swift */,
-				042E3A5328A29ABC00D50AC3 /* Main.storyboard */,
 				042E3A5628A29ABD00D50AC3 /* Assets.xcassets */,
 				042E3A5828A29ABD00D50AC3 /* LaunchScreen.storyboard */,
 				042E3A5B28A29ABD00D50AC3 /* Info.plist */,
 			);
 			path = "flickr-image-viewing";
+			sourceTree = "<group>";
+		};
+		042E3A6128A2A50400D50AC3 /* PhotoFeedModule */ = {
+			isa = PBXGroup;
+			children = (
+				042E3A6628A2A55400D50AC3 /* Presenter */,
+				042E3A6528A2A54A00D50AC3 /* View */,
+				042E3A6328A2A53700D50AC3 /* Model */,
+			);
+			path = PhotoFeedModule;
+			sourceTree = "<group>";
+		};
+		042E3A6228A2A51F00D50AC3 /* FullImageModule */ = {
+			isa = PBXGroup;
+			children = (
+				042E3A6928A2A56C00D50AC3 /* Presenter */,
+				042E3A6828A2A56700D50AC3 /* View */,
+				042E3A6728A2A55E00D50AC3 /* Model */,
+			);
+			path = FullImageModule;
+			sourceTree = "<group>";
+		};
+		042E3A6328A2A53700D50AC3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				042E3A7528A3D8C200D50AC3 /* PhotoFeedModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		042E3A6528A2A54A00D50AC3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				042E3A7128A3AC5100D50AC3 /* PhotoFeedView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		042E3A6628A2A55400D50AC3 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				042E3A6D28A2AC5900D50AC3 /* PhotoFeedController.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		042E3A6728A2A55E00D50AC3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		042E3A6828A2A56700D50AC3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		042E3A6928A2A56C00D50AC3 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		042E3A6A28A2A59300D50AC3 /* DependenciesBuilder */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DependenciesBuilder;
+			sourceTree = "<group>";
+		};
+		042E3A6B28A2A5BC00D50AC3 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				042E3A6F28A2ACF000D50AC3 /* Extension + PhotoFeedView.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		042E3A6C28A2A90700D50AC3 /* NetworkLayer */ = {
+			isa = PBXGroup;
+			children = (
+				042E3A7328A3D7C300D50AC3 /* NetworkService.swift */,
+			);
+			path = NetworkLayer;
+			sourceTree = "<group>";
+		};
+		5FD4B3300CCD47DD065D0C6C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3F49A82CBAF9D093BA7A4CCD /* Pods_flickr_image_viewing.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B4DF3C4BCED9A62E31C1400C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C07F49759201662808A6DCF4 /* Pods-flickr-image-viewing.debug.xcconfig */,
+				833AEFDDD89D0A55B361FFB1 /* Pods-flickr-image-viewing.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +195,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 042E3A5E28A29ABD00D50AC3 /* Build configuration list for PBXNativeTarget "flickr-image-viewing" */;
 			buildPhases = (
+				C5ADA555C00CD72727102D83 /* [CP] Check Pods Manifest.lock */,
 				042E3A4628A29ABC00D50AC3 /* Sources */,
 				042E3A4728A29ABC00D50AC3 /* Frameworks */,
 				042E3A4828A29ABC00D50AC3 /* Resources */,
+				B866A3221968F2EEFF183D3D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -127,19 +250,64 @@
 			files = (
 				042E3A5A28A29ABD00D50AC3 /* LaunchScreen.storyboard in Resources */,
 				042E3A5728A29ABD00D50AC3 /* Assets.xcassets in Resources */,
-				042E3A5528A29ABC00D50AC3 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		B866A3221968F2EEFF183D3D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-flickr-image-viewing/Pods-flickr-image-viewing-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-flickr-image-viewing/Pods-flickr-image-viewing-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-flickr-image-viewing/Pods-flickr-image-viewing-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C5ADA555C00CD72727102D83 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-flickr-image-viewing-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		042E3A4628A29ABC00D50AC3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				042E3A5228A29ABC00D50AC3 /* ViewController.swift in Sources */,
+				042E3A7228A3AC5100D50AC3 /* PhotoFeedView.swift in Sources */,
+				042E3A7428A3D7C300D50AC3 /* NetworkService.swift in Sources */,
 				042E3A4E28A29ABC00D50AC3 /* AppDelegate.swift in Sources */,
+				042E3A6E28A2AC5900D50AC3 /* PhotoFeedController.swift in Sources */,
+				042E3A7028A2ACF000D50AC3 /* Extension + PhotoFeedView.swift in Sources */,
+				042E3A7628A3D8C200D50AC3 /* PhotoFeedModel.swift in Sources */,
 				042E3A5028A29ABC00D50AC3 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -147,14 +315,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		042E3A5328A29ABC00D50AC3 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				042E3A5428A29ABC00D50AC3 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		042E3A5828A29ABD00D50AC3 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -282,6 +442,7 @@
 		};
 		042E3A5F28A29ABD00D50AC3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C07F49759201662808A6DCF4 /* Pods-flickr-image-viewing.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -292,7 +453,6 @@
 				INFOPLIST_FILE = "flickr-image-viewing/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -310,6 +470,7 @@
 		};
 		042E3A6028A29ABD00D50AC3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 833AEFDDD89D0A55B361FFB1 /* Pods-flickr-image-viewing.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -320,7 +481,6 @@
 				INFOPLIST_FILE = "flickr-image-viewing/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
