@@ -14,7 +14,7 @@ class PhotoFeedView: UICollectionViewController, UICollectionViewDelegateFlowLay
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        self.collectionView!.register(PhotoFeedCell.self, forCellWithReuseIdentifier: reuseIdentifier)
 
         // Do any additional setup after loading the view.
     }
@@ -24,7 +24,38 @@ class PhotoFeedView: UICollectionViewController, UICollectionViewDelegateFlowLay
     
     var searches: [FlickrSearchResults] = []
     private var flickr = Flickr()
+    private let itemsPerRow: CGFloat = 2
+    let group = DispatchGroup()
+    let queue1 = DispatchQueue.global(qos: .userInteractive)
     
+    var selectedCell: PhotoFeedCell?
+    var selectedCellImageViewSnapshot: UIView?
+    var animator: Animator?
+    
+    
+    lazy var reloadButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = .systemBlue
+        button.addTarget(self, action: #selector(reloadButtonPressed), for: .touchUpInside)
+//        let url = URL(string: "https://farm66.staticflickr.com/65535/52281288879_5b90d262ec_m.jpg")
+//        button.kf.setImage(with: url, for: .normal)
+//
+        
+        return button
+    }()
+    
+    lazy var flickrImage: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFill
+        imageView.backgroundColor = .systemBlue
+        return imageView
+    }()
+    
+    @objc func reloadButtonPressed() {
+        collectionView.reloadData()
+    }
     /*
     // MARK: - Navigation
 
@@ -38,57 +69,56 @@ class PhotoFeedView: UICollectionViewController, UICollectionViewDelegateFlowLay
     // MARK: UICollectionViewDataSource
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return searches.count
     }
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
+  
         return searches[section].searchResults.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? PhotoFeedCell else { return UICollectionViewCell() }
     
-        cell.backgroundColor = .black
-    
+        
+           
+                let flickrPhoto = self.photo(for: indexPath)
+//                print(Thread.current)
+//            print("There is \(searches.count) results")
+        
+        cell.imageView.kf.setImage(with: flickrPhoto.thumbnailURL)
+            
+            
+   
+        
+        
         return cell
     }
 
     // MARK: UICollectionViewDelegate
 
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedCell = collectionView.cellForItem(at: indexPath) as? PhotoFeedCell
+        selectedCellImageViewSnapshot = selectedCell?.imageView.snapshotView(afterScreenUpdates: false)
+        
     }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-    
-    }
-    */
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize.init(width: view.frame.width, height: 250)
+        let paddingSpace = sectionInsets.left * (itemsPerRow + 1 )
+        let availableWidth = view.frame.width - paddingSpace
+        let widthPerItem = availableWidth / itemsPerRow
+        
+        return CGSize(width: widthPerItem, height: widthPerItem)
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return sectionInsets
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return sectionInsets.left
     }
     
     init() {

@@ -15,6 +15,12 @@ struct FlickrSearchResults: Mappable {
     
     init?(map: Map) { }
     
+    init?(searchTerm: String, searchResults: [FlickrPhoto]) {
+        
+        self.searchTerm = searchTerm
+        self.searchResults = searchResults
+    }
+    
     mutating func mapping(map: Map) {
         searchResults <- map["photos.photo"]
     }
@@ -24,8 +30,9 @@ struct FlickrSearchResults: Mappable {
 struct FlickrPhoto: Mappable {
     
     
-    var thumbnail: UIImage?
-    var largeImage: UIImage?
+    var thumbnail: UIImageView!
+    var largeImage: UIImageView!
+    var thumbnailURL: URL!
     var photoID: String = ""
     var farm: Int = 0
     var server: String = ""
@@ -40,6 +47,12 @@ struct FlickrPhoto: Mappable {
         
     }
     
+    init?(photoID: String, farm: Int, server: String, secret: String) {
+        self.photoID = photoID
+        self.farm = farm
+        self.server = server
+        self.secret = secret
+    }
     mutating func mapping(map: Map) {
         photoID <- map["id"]
         farm <- map["farm"]

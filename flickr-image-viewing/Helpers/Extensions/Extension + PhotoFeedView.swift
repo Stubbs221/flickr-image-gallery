@@ -24,15 +24,12 @@ extension PhotoFeedView {
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.tintColor = .white
         showSearchBarButton(shouldShow: true)
-       
-        
     }
     
     @objc func handleShowSearchBar() {
         search(shouldShow: true)
         searchBar.sizeToFit()
         searchBar.searchTextField.backgroundColor = .white
-        
         
         searchBar.becomeFirstResponder()
         searchBar.delegate = self
@@ -78,7 +75,6 @@ extension PhotoFeedView: UISearchBarDelegate {
     }
 }
 
-
 extension PhotoFeedView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         guard let text = textField.text, !text.isEmpty else { return true }
@@ -91,7 +87,6 @@ extension PhotoFeedView: UITextFieldDelegate {
         NetworkService.searchFlickr(for: text) { [ weak self ] searchResults in
             DispatchQueue.main.async {
                 activityIndicator.removeFromSuperview()
-                
                 switch searchResults {
                 case .failure(let error) :
                     print("Error searching: \(error)")
@@ -102,9 +97,18 @@ extension PhotoFeedView: UITextFieldDelegate {
                 }
             }
         }
-        
         textField.text = nil
         textField.resignFirstResponder()
         return true
+    }
+}
+
+extension PhotoFeedView {
+    func presentSecondVC(with data: FlickrPhoto) {
+        let secondVC = FullImageView()
+        secondVC.transitioningDelegate = self
+        secondVC.modalPresentationStyle = .fullScreen
+        secondVC.data = data
+        present(secondVC, animated: true)
     }
 }
