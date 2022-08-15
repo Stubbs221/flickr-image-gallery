@@ -10,9 +10,13 @@ import UIKit
 extension PhotoFeedView: UIViewControllerTransitioningDelegate {
     
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        guard let firstViewController = presenting as? PhotoFeedView,
-              let secondViewController = presented as? FullImageView,
-              let selectedCellImageViewSnapshot = selectedCellImageViewSnapshot else { return nil }
+        print("Type of presented: \(type(of: presented)), must be fullImageView")
+        print("Type of presenting: \(type(of: presenting)), must be photoFeedView")
+        guard let secondViewController = presented as? FullImageView else { return nil }
+        guard let firstViewController = presenting as? PhotoFeedView else { return nil }
+        
+        guard let selectedCellImageViewSnapshot = selectedCellImageViewSnapshot else { return nil }
+//        else { return nil }
         
         animator = Animator(type: .present, firstViewController: firstViewController, secondViewController: secondViewController, selectedCellImageViewSnapshot: selectedCellImageViewSnapshot)
         return animator

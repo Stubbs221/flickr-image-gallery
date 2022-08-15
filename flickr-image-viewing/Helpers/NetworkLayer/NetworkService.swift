@@ -69,13 +69,16 @@ class NetworkService {
     class func getPhotosURL(photoData: [FlickrPhoto]) -> [FlickrPhoto] {
         let photos: [FlickrPhoto] = photoData.compactMap { photoObject in
 
-            var flickrPhoto: FlickrPhoto = FlickrPhoto(photoID: photoObject.photoID, farm: photoObject.farm, server: photoObject.server, secret: photoObject.secret) ?? photoObject
-            guard let url = flickrImageURL(for: flickrPhoto) else { return photoObject }
-            print(url)
-            print(flickrPhoto.photoID)
+            var flickrPhoto: FlickrPhoto = FlickrPhoto(photoID: photoObject.photoID, farm: photoObject.farm, server: photoObject.server, secret: photoObject.secret, title: photoObject.title) ?? photoObject
+            guard let url = flickrImageURL(for: flickrPhoto),
+                let largeImageURL = flickrImageURL("b", for: flickrPhoto)
+            else { return photoObject }
+//            print(url)
+//            print(flickrPhoto.photoID)
 
             print(Thread.current)
             flickrPhoto.thumbnailURL = url
+            flickrPhoto.largeImageURL = largeImageURL
 //            flickrPhoto.thumbnail = UIImageView()
 //            flickrPhoto.thumbnail.kf.setImage(with: url)
             return flickrPhoto

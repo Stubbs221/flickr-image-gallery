@@ -12,28 +12,42 @@ extension PhotoFeedView {
     func setupUI() {
           
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.title = "Search Bar"
+        navigationItem.title = "Find on Flickr"
 
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = .systemBlue
-        appearance.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        appearance.backgroundColor = UIColor(named: "color4")
+        appearance.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: "color2")]
        
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = navigationController?.navigationBar.standardAppearance
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.tintColor = .white
         showSearchBarButton(shouldShow: true)
+        
+        view.addSubview(collectionView)
+        
+        NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)])
     }
     
     @objc func handleShowSearchBar() {
         search(shouldShow: true)
         searchBar.sizeToFit()
-        searchBar.searchTextField.backgroundColor = .white
-        
+        searchBar.searchTextField.backgroundColor = UIColor(named: "color3")
         searchBar.becomeFirstResponder()
         searchBar.delegate = self
         searchBar.searchTextField.delegate = self
+        let textFieldInsideUISearchBar = searchBar.value(forKey: "searchField") as? UITextField
+        textFieldInsideUISearchBar?.textColor = UIColor(named: "color1")
+        
+        let clearButton = textFieldInsideUISearchBar?.value(forKey: "clearButton") as? UIButton
+        let template = clearButton?.imageView?.image?.withRenderingMode(.alwaysTemplate)
+        clearButton?.setImage(template, for: .normal)
+        clearButton?.tintColor = UIColor(named: "color4")
     }
     
     func showSearchBarButton(shouldShow: Bool) {
@@ -103,12 +117,62 @@ extension PhotoFeedView: UITextFieldDelegate {
     }
 }
 
+// MARK: UICollectionViewDataSource
+
+extension PhotoFeedView: UICollectionViewDataSource {
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return searches.count
+    }
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return searches[section].searchResults.count
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? PhotoFeedCell else { return UICollectionViewCell() }
+        let flickrPhoto = self.photo(for: indexPath)
+        cell.imageView.kf.setImage(with: flickrPhoto.thumbnailURL)
+        return cell
+    }
+}
+
+// MARK: UICollectionViewDelegate
+
+extension PhotoFeedView: UICollectionViewDelegate {
+    
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedCell = collectionView.cellForItem(at: indexPath) as? PhotoFeedCell
+        selectedCellImageViewSnapshot = selectedCell?.imageView.snapshotView(afterScreenUpdates: false)
+        presentSecondVC(with: photo(for: indexPath))
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let paddingSpace = sectionInsets.left * (itemsPerRow + 1 )
+        let availableWidth = view.frame.width - paddingSpace
+        let widthPerItem = availableWidth / itemsPerRow
+        
+        return CGSize(width: widthPerItem, height: widthPerItem)
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return sectionInsets
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return sectionInsets.left
+    }
+    
+}
 extension PhotoFeedView {
     func presentSecondVC(with data: FlickrPhoto) {
         let secondVC = FullImageView()
         secondVC.transitioningDelegate = self
         secondVC.modalPresentationStyle = .fullScreen
         secondVC.data = data
+        
         present(secondVC, animated: true)
     }
 }
