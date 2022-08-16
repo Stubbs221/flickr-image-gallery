@@ -17,25 +17,20 @@ final class Animator: NSObject, UIViewControllerAnimatedTransitioning {
     private let navController: UINavigationController
     private var selectedCellImageViewSnapshot: UIView
     private let cellImageViewRect: CGRect
-//    private let cellLabelRect: CGRect
     
     init?(type: PresentationType, navController: UINavigationController, secondViewController: FullImageView, selectedCellImageViewSnapshot: UIView) {
         self.type = type
         self.navController = navController
-        
         self.secondViewController = secondViewController
         self.selectedCellImageViewSnapshot = selectedCellImageViewSnapshot
         
-        guard
-            let firstVC = navController.viewControllers.first as? PhotoFeedView else { return nil }
+        guard let firstVC = navController.viewControllers.first as? PhotoFeedView else { return nil }
         
         self.firstViewController = firstVC
         guard let window = firstViewController.view.window ?? secondViewController.view.window,
-                  let selectedCell = firstViewController.selectedCell
-                else { return nil }
+            let selectedCell = firstViewController.selectedCell else { return nil }
         
         self.cellImageViewRect = selectedCell.imageView.convert(selectedCell.imageView.bounds, to: window)
-        
     }
     
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
@@ -56,7 +51,8 @@ final class Animator: NSObject, UIViewControllerAnimatedTransitioning {
         guard let selectedCell = firstViewController.selectedCell,
               let window = firstViewController.view.window ?? secondViewController.view.window,
               let cellImageSnapshot = selectedCell.imageView.snapshotView(afterScreenUpdates: true),
-              let controllerImageSnapshot = secondViewController.fullImage.snapshotView(afterScreenUpdates: true) else {
+              let controllerImageSnapshot = secondViewController.fullImage.snapshotView(afterScreenUpdates: true),
+              let dismissViewButtonSnapshot = secondViewController.dismissViewButton.snapshotView(afterScreenUpdates: true) else {
             transitionContext.completeTransition(true)
             return
         }
@@ -80,24 +76,30 @@ final class Animator: NSObject, UIViewControllerAnimatedTransitioning {
         
         toView.alpha = 0
         
-//        [imageViewSnapshot].forEach { containerView.addSubview($0)}
-        
-        [backgroundView, selectedCellImageViewSnapshot, controllerImageSnapshot].forEach { containerView.addSubview($0)
+        [backgroundView, selectedCellImageViewSnapshot, controllerImageSnapshot, dismissViewButtonSnapshot].forEach { containerView.addSubview($0)
         }
         
         let controllerImageViewRect = secondViewController.fullImage.convert(secondViewController.fullImage.bounds, to: window)
-        
-        [selectedCellImageViewSnapshot, controllerImageSnapshot].forEach { $0.frame = isPresenting ? cellImageViewRect : controllerImageViewRect
+        let dismissViewButtonRect = secondViewController.dismissViewButton.convert(secondViewController.dismissViewButton.bounds, to: window)
+        [selectedCellImageViewSnapshot, controllerImageSnapshot].forEach {
+            $0.frame = isPresenting ? cellImageViewRect : controllerImageViewRect
+            $0.layer.cornerRadius = isPresenting ? 12 : 0
+            $0.layer.masksToBounds = true
         }
         
         controllerImageSnapshot.alpha = isPresenting ? 0 : 1
         selectedCellImageViewSnapshot.alpha = isPresenting ? 1 : 0
+        
+        dismissViewButtonSnapshot.frame = dismissViewButtonRect
+        dismissViewButtonSnapshot.alpha = isPresenting ? 0 : 1
         
         UIView.animateKeyframes(withDuration: Self.duration, delay: 0, options: .calculationModeCubic) {
             UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 1) {
                 
                 self.selectedCellImageViewSnapshot.frame = isPresenting ? controllerImageViewRect : self.cellImageViewRect
                 controllerImageSnapshot.frame = isPresenting ? controllerImageViewRect : self.cellImageViewRect
+                [controllerImageSnapshot, self.selectedCellImageViewSnapshot].forEach { $0.layer.cornerRadius = isPresenting ? 0 : 12
+                }
                 
                 fadeView.alpha = isPresenting ? 1 : 0
             }
@@ -105,12 +107,14 @@ final class Animator: NSObject, UIViewControllerAnimatedTransitioning {
             UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.6) {
                 self.selectedCellImageViewSnapshot.alpha = isPresenting ? 0 : 1
                 controllerImageSnapshot.alpha = isPresenting ? 1 : 0
+                dismissViewButtonSnapshot.alpha = isPresenting ? 1 : 0
             }
         } completion: { _ in
             self.selectedCellImageViewSnapshot.removeFromSuperview()
             controllerImageSnapshot.removeFromSuperview()
             
             backgroundView.removeFromSuperview()
+            dismissViewButtonSnapshot.removeFromSuperview()
             toView.alpha = 1
             
             transitionContext.completeTransition(true)

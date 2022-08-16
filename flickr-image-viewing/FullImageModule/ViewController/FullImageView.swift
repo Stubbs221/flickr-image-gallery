@@ -16,13 +16,9 @@ class FullImageView: UIViewController {
         super.viewDidLoad()
         setupUI()
         guard let data = data else { return }
-//        let flickrPhoto = UIImageView()
-//        flickrPhoto.kf.setImage(with: data.largeImageURL)
         print(data.largeImageURL)
         fullImage.kf.setImage(with: data.thumbnailURL)
-        
     }
-    
     
     lazy var fullImage: UIImageView = {
         let imageView = UIImageView()
@@ -30,11 +26,10 @@ class FullImageView: UIViewController {
         imageView.layer.cornerRadius = 15
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
+        
         return imageView
     }()
-    
 
-    
     lazy var titleLabel: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -45,18 +40,15 @@ class FullImageView: UIViewController {
         button.backgroundColor = UIColor(named: "color3")
         button.setTitle(data.title, for: .normal)
         button.isUserInteractionEnabled = false
+        
         return button
     }()
     
     lazy var dismissViewButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-//        button.setImage(UIImage(systemName: "chevron.backward"), for: .normal)
         var configuration = UIButton.Configuration.plain()
         configuration.image = UIImage(systemName: "chevron.backward", withConfiguration: UIImage.SymbolConfiguration(scale: .large))
-//        configuration.inse
-        
-        
         button.configuration = configuration
         button.tintColor = UIColor(named: "color2")
         button.addTarget(self, action: #selector(dismissViewButtonPressed), for: .touchUpInside)
@@ -67,15 +59,5 @@ class FullImageView: UIViewController {
     @objc func dismissViewButtonPressed() {
         dismiss(animated: true)
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 

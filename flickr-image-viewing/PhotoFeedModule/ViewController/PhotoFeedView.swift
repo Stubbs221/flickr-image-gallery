@@ -22,10 +22,8 @@ class PhotoFeedView: UIViewController, UICollectionViewDelegateFlowLayout {
     
     
     var searches: [FlickrSearchResults] = []
-    var flickr = Flickr()
+    
     let itemsPerRow: CGFloat = 2
-    let group = DispatchGroup()
-    let queue1 = DispatchQueue.global(qos: .userInteractive)
     
     var selectedCell: PhotoFeedCell?
     var selectedCellImageViewSnapshot: UIView?
@@ -45,20 +43,4 @@ class PhotoFeedView: UIViewController, UICollectionViewDelegateFlowLayout {
         collectionView.delegate = self
         return collectionView
     }()
-    
-    @objc func reloadButtonPressed() {
-        collectionView.reloadData()
-    }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
-
-
-  
 }

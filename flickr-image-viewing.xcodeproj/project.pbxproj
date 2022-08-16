@@ -11,7 +11,6 @@
 		042E3A5028A29ABC00D50AC3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042E3A4F28A29ABC00D50AC3 /* SceneDelegate.swift */; };
 		042E3A5728A29ABD00D50AC3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 042E3A5628A29ABD00D50AC3 /* Assets.xcassets */; };
 		042E3A5A28A29ABD00D50AC3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 042E3A5828A29ABD00D50AC3 /* LaunchScreen.storyboard */; };
-		042E3A6E28A2AC5900D50AC3 /* PhotoFeedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042E3A6D28A2AC5900D50AC3 /* PhotoFeedController.swift */; };
 		042E3A7028A2ACF000D50AC3 /* Extension + PhotoFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042E3A6F28A2ACF000D50AC3 /* Extension + PhotoFeedView.swift */; };
 		042E3A7228A3AC5100D50AC3 /* PhotoFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042E3A7128A3AC5100D50AC3 /* PhotoFeedView.swift */; };
 		042E3A7428A3D7C300D50AC3 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042E3A7328A3D7C300D50AC3 /* NetworkService.swift */; };
@@ -32,7 +31,6 @@
 		042E3A5628A29ABD00D50AC3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		042E3A5928A29ABD00D50AC3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		042E3A5B28A29ABD00D50AC3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		042E3A6D28A2AC5900D50AC3 /* PhotoFeedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoFeedController.swift; sourceTree = "<group>"; };
 		042E3A6F28A2ACF000D50AC3 /* Extension + PhotoFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + PhotoFeedView.swift"; sourceTree = "<group>"; };
 		042E3A7128A3AC5100D50AC3 /* PhotoFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoFeedView.swift; sourceTree = "<group>"; };
 		042E3A7328A3D7C300D50AC3 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
@@ -96,8 +94,7 @@
 		042E3A6128A2A50400D50AC3 /* PhotoFeedModule */ = {
 			isa = PBXGroup;
 			children = (
-				042E3A6628A2A55400D50AC3 /* Presenter */,
-				042E3A6528A2A54A00D50AC3 /* View */,
+				042E3A6528A2A54A00D50AC3 /* ViewController */,
 				042E3A6328A2A53700D50AC3 /* Model */,
 			);
 			path = PhotoFeedModule;
@@ -106,8 +103,7 @@
 		042E3A6228A2A51F00D50AC3 /* FullImageModule */ = {
 			isa = PBXGroup;
 			children = (
-				042E3A6928A2A56C00D50AC3 /* Presenter */,
-				042E3A6828A2A56700D50AC3 /* View */,
+				042E3A6828A2A56700D50AC3 /* ViewController */,
 				042E3A6728A2A55E00D50AC3 /* Model */,
 			);
 			path = FullImageModule;
@@ -121,22 +117,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		042E3A6528A2A54A00D50AC3 /* View */ = {
+		042E3A6528A2A54A00D50AC3 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
 				042E3A7128A3AC5100D50AC3 /* PhotoFeedView.swift */,
 				042E3A7728A660DB00D50AC3 /* PhotoFeedCell.swift */,
 				042E3A8228AB8F5D00D50AC3 /* PhotoFeedHeaderView.swift */,
 			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		042E3A6628A2A55400D50AC3 /* Presenter */ = {
-			isa = PBXGroup;
-			children = (
-				042E3A6D28A2AC5900D50AC3 /* PhotoFeedController.swift */,
-			);
-			path = Presenter;
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 		042E3A6728A2A55E00D50AC3 /* Model */ = {
@@ -146,19 +134,12 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		042E3A6828A2A56700D50AC3 /* View */ = {
+		042E3A6828A2A56700D50AC3 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
 				042E3A7B28A7C1A900D50AC3 /* FullImageView.swift */,
 			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		042E3A6928A2A56C00D50AC3 /* Presenter */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Presenter;
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 		042E3A6A28A2A59300D50AC3 /* DependenciesBuilder */ = {
@@ -335,7 +316,6 @@
 				042E3A8328AB8F5D00D50AC3 /* PhotoFeedHeaderView.swift in Sources */,
 				042E3A7C28A7C1A900D50AC3 /* FullImageView.swift in Sources */,
 				042E3A7A28A7BEB800D50AC3 /* PhotoFeedView + TransitioningDelegate.swift in Sources */,
-				042E3A6E28A2AC5900D50AC3 /* PhotoFeedController.swift in Sources */,
 				042E3A7828A660DB00D50AC3 /* PhotoFeedCell.swift in Sources */,
 				042E3A7028A2ACF000D50AC3 /* Extension + PhotoFeedView.swift in Sources */,
 				042E3A7628A3D8C200D50AC3 /* PhotoFeedModel.swift in Sources */,

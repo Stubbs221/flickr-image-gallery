@@ -15,18 +15,6 @@ let apiKey = "e09f767500029106d4c53e0adf56c8c2"
 
 class NetworkService {
     
-    class func loadLargeImage(_ completion: @escaping (Result<FlickrPhoto, Swift.Error>) -> Void, for image: FlickrPhoto) -> UIImage? {
-        guard let loadURL = flickrImageURL("b", for: image) else { DispatchQueue.main.async {
-            completion(.failure(Error.invalidURL))
-        }
-            return UIImage()
-        }
-        
-        let image = UIImageView()
-        image.kf.setImage(with: loadURL)
-        return image.image
-    }
-    
     class func searchFlickr(for searchTerm: String, completion: @escaping (Result<FlickrSearchResults, Swift.Error>) -> Void) {
         guard let searchURL = flickrSearchURL(for: searchTerm) else {
             completion(.failure(Error.unknownAPIResponse))
@@ -41,31 +29,12 @@ class NetworkService {
                 var searchResults = FlickrSearchResults(searchTerm: searchTerm, searchResults: flickrPhotos) ?? photoArray
                 
                 completion(.success(searchResults))
-                
             case .failure(let error):
                 completion(.failure(error))
-                
             }
         }
     }
-    
-//    class func getPhotos(photoData: [FlickrPhoto]) -> [FlickrPhoto] {
-//        let photos: [FlickrPhoto] = photoData.compactMap { photoObject in
-////            guard let flickrPhoto = FlickrPhoto(photoID: photoObject.photoID, farm: photoObject.farm, server: photoObject.server, secret: photoObject.secret) else { return photoObject }
-//            var flickrPhoto: FlickrPhoto = FlickrPhoto(photoID: photoObject.photoID, farm: photoObject.farm, server: photoObject.server, secret: photoObject.secret) ?? photoObject
-//            guard let url = flickrImageURL(for: flickrPhoto) else { return photoObject }
-//            print(url)
-//            print(flickrPhoto.photoID)
-//
-//            print(Thread.current)
-//            flickrPhoto.thumbnail = UIImageView()
-//            flickrPhoto.thumbnail.kf.setImage(with: url)
-//            return flickrPhoto
-//        }
-//
-//        return photos
-//    }
-//
+
     class func getPhotosURL(photoData: [FlickrPhoto]) -> [FlickrPhoto] {
         let photos: [FlickrPhoto] = photoData.compactMap { photoObject in
 
@@ -73,14 +42,9 @@ class NetworkService {
             guard let url = flickrImageURL(for: flickrPhoto),
                 let largeImageURL = flickrImageURL("b", for: flickrPhoto)
             else { return photoObject }
-//            print(url)
-//            print(flickrPhoto.photoID)
 
-            print(Thread.current)
             flickrPhoto.thumbnailURL = url
             flickrPhoto.largeImageURL = largeImageURL
-//            flickrPhoto.thumbnail = UIImageView()
-//            flickrPhoto.thumbnail.kf.setImage(with: url)
             return flickrPhoto
         }
         
@@ -93,8 +57,9 @@ class NetworkService {
     
     class func flickrSearchURL(for searchTerm: String) -> URL? {
         guard let escapedTerm = searchTerm.addingPercentEncoding(withAllowedCharacters: CharacterSet.alphanumerics) else { return nil }
+        
         let URLString = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=\(apiKey)&text=\(escapedTerm)&per_page=20&format=json&nojsoncallback=1"
-        print(URLString)
+
         return URL(string: URLString)
     }
 }

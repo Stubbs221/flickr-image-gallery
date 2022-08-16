@@ -11,7 +11,6 @@ import UIKit
 extension PhotoFeedView {
     func setupUI() {
         view.addSubview(collectionView)
-//        view.addSubview(navBar)
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "Find on Flickr"
 

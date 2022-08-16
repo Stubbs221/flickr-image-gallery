@@ -16,6 +16,7 @@ class PhotoFeedHeaderView: UICollectionReusableView {
         label.font = UIFont.systemFont(ofSize: 30, weight: .semibold)
         label.textAlignment = .center
         label.textColor = UIColor(named: "color4")
+        
         return label
     }()
     
@@ -31,10 +32,8 @@ class PhotoFeedHeaderView: UICollectionReusableView {
     public func configure(title: String) {
         
         label.text = title
-        
         addSubview(labelView)
         labelView.addSubview(label)
-        
         
         NSLayoutConstraint.activate([
             labelView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
