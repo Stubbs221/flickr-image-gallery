@@ -13,7 +13,8 @@ extension PhotoFeedView: UIViewControllerTransitioningDelegate {
         print("Type of presented: \(type(of: presented)), must be fullImageView")
         print("Type of presenting: \(type(of: presenting)), must be photoFeedView")
         guard let secondViewController = presented as? FullImageView else { return nil }
-        guard let firstViewController = presenting as? PhotoFeedView else { return nil }
+        guard let firstNavViewController = presenting as? UINavigationController else { return nil }
+        guard let firstViewController = firstNavViewController.viewControllers.first as? PhotoFeedView else { return nil }
         
         guard let selectedCellImageViewSnapshot = selectedCellImageViewSnapshot else { return nil }
 //        else { return nil }

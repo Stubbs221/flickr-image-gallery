@@ -10,7 +10,8 @@ import UIKit
 
 extension PhotoFeedView {
     func setupUI() {
-          
+        view.addSubview(collectionView)
+//        view.addSubview(navBar)
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "Find on Flickr"
 
@@ -25,7 +26,7 @@ extension PhotoFeedView {
         navigationController?.navigationBar.tintColor = .white
         showSearchBarButton(shouldShow: true)
         
-        view.addSubview(collectionView)
+        
         
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -135,13 +136,25 @@ extension PhotoFeedView: UICollectionViewDataSource {
         cell.imageView.kf.setImage(with: flickrPhoto.thumbnailURL)
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: PhotoFeedHeaderView.identifier, for: indexPath) as? PhotoFeedHeaderView else { return UICollectionReusableView() }
+        header.configure(title: searches[indexPath.section].searchTerm)
+        
+        return header
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: view.frame.size.width, height: 90)
+    }
 }
 
 // MARK: UICollectionViewDelegate
 
 extension PhotoFeedView: UICollectionViewDelegate {
     
-
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedCell = collectionView.cellForItem(at: indexPath) as? PhotoFeedCell
         selectedCellImageViewSnapshot = selectedCell?.imageView.snapshotView(afterScreenUpdates: false)
