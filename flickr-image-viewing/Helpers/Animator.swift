@@ -9,24 +9,33 @@ import UIKit
 
 final class Animator: NSObject, UIViewControllerAnimatedTransitioning {
     
-    static let duration: TimeInterval = 0.25
+    static let duration: TimeInterval = 0.4
     
     private let type: PresentationType
     private let firstViewController: PhotoFeedView
     private let secondViewController: FullImageView
+    private let navController: UINavigationController
     private var selectedCellImageViewSnapshot: UIView
     private let cellImageViewRect: CGRect
+//    private let cellLabelRect: CGRect
     
-    init?(type: PresentationType, firstViewController: PhotoFeedView, secondViewController: FullImageView, selectedCellImageViewSnapshot: UIView) {
+    init?(type: PresentationType, navController: UINavigationController, secondViewController: FullImageView, selectedCellImageViewSnapshot: UIView) {
         self.type = type
-        self.firstViewController = firstViewController
+        self.navController = navController
+        
         self.secondViewController = secondViewController
         self.selectedCellImageViewSnapshot = selectedCellImageViewSnapshot
         
+        guard
+            let firstVC = navController.viewControllers.first as? PhotoFeedView else { return nil }
+        
+        self.firstViewController = firstVC
         guard let window = firstViewController.view.window ?? secondViewController.view.window,
-              let selectedCell = firstViewController.selectedCell else { return nil }
+                  let selectedCell = firstViewController.selectedCell
+                else { return nil }
         
         self.cellImageViewRect = selectedCell.imageView.convert(selectedCell.imageView.bounds, to: window)
+        
     }
     
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
@@ -54,15 +63,26 @@ final class Animator: NSObject, UIViewControllerAnimatedTransitioning {
         
         let isPresenting = type.isPresenting
         
+        let backgroundView: UIView
+        let fadeView = UIView(frame: containerView.bounds)
+        fadeView.backgroundColor = secondViewController.view.backgroundColor
+        
         if isPresenting {
             selectedCellImageViewSnapshot = cellImageSnapshot
+            
+            backgroundView = UIView(frame: containerView.bounds)
+            backgroundView.addSubview(fadeView)
+            fadeView.alpha = 0
+        } else {
+            backgroundView = navController.view.snapshotView(afterScreenUpdates: true) ?? fadeView
+            backgroundView.addSubview(fadeView)
         }
         
         toView.alpha = 0
         
 //        [imageViewSnapshot].forEach { containerView.addSubview($0)}
         
-        [selectedCellImageViewSnapshot, controllerImageSnapshot].forEach { containerView.addSubview($0)
+        [backgroundView, selectedCellImageViewSnapshot, controllerImageSnapshot].forEach { containerView.addSubview($0)
         }
         
         let controllerImageViewRect = secondViewController.fullImage.convert(secondViewController.fullImage.bounds, to: window)
@@ -78,6 +98,8 @@ final class Animator: NSObject, UIViewControllerAnimatedTransitioning {
                 
                 self.selectedCellImageViewSnapshot.frame = isPresenting ? controllerImageViewRect : self.cellImageViewRect
                 controllerImageSnapshot.frame = isPresenting ? controllerImageViewRect : self.cellImageViewRect
+                
+                fadeView.alpha = isPresenting ? 1 : 0
             }
             
             UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.6) {
@@ -88,7 +110,7 @@ final class Animator: NSObject, UIViewControllerAnimatedTransitioning {
             self.selectedCellImageViewSnapshot.removeFromSuperview()
             controllerImageSnapshot.removeFromSuperview()
             
-            
+            backgroundView.removeFromSuperview()
             toView.alpha = 1
             
             transitionContext.completeTransition(true)

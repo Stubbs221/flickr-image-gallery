@@ -14,20 +14,21 @@ extension PhotoFeedView: UIViewControllerTransitioningDelegate {
         print("Type of presenting: \(type(of: presenting)), must be photoFeedView")
         guard let secondViewController = presented as? FullImageView else { return nil }
         guard let firstNavViewController = presenting as? UINavigationController else { return nil }
-        guard let firstViewController = firstNavViewController.viewControllers.first as? PhotoFeedView else { return nil }
+//        guard let firstViewController = firstNavViewController.viewControllers.first as? PhotoFeedView else { return nil }
         
         guard let selectedCellImageViewSnapshot = selectedCellImageViewSnapshot else { return nil }
-//        else { return nil }
         
-        animator = Animator(type: .present, firstViewController: firstViewController, secondViewController: secondViewController, selectedCellImageViewSnapshot: selectedCellImageViewSnapshot)
+        currentNavigationController = firstNavViewController
+        animator = Animator(type: .present, navController: firstNavViewController, secondViewController: secondViewController, selectedCellImageViewSnapshot: selectedCellImageViewSnapshot)
         return animator
     }
     
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         guard let secondViewController = dismissed as? FullImageView,
-              let selectedCellImageViewSnapshot = selectedCellImageViewSnapshot else { return nil }
+              let selectedCellImageViewSnapshot = selectedCellImageViewSnapshot,
+              let navVC = currentNavigationController else { return nil }
         
-        animator = Animator(type: .dismiss, firstViewController: self, secondViewController: secondViewController, selectedCellImageViewSnapshot: selectedCellImageViewSnapshot)
+        animator = Animator(type: .dismiss, navController: navVC, secondViewController: secondViewController, selectedCellImageViewSnapshot: selectedCellImageViewSnapshot)
         return animator
     }
 }

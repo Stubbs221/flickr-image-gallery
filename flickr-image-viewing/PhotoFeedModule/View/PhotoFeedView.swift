@@ -20,6 +20,7 @@ class PhotoFeedView: UIViewController, UICollectionViewDelegateFlowLayout {
     let reuseIdentifier = "FlickrCell"
     let sectionInsets = UIEdgeInsets(top: 20, left: 20, bottom: 50, right: 20)
     
+    
     var searches: [FlickrSearchResults] = []
     var flickr = Flickr()
     let itemsPerRow: CGFloat = 2
@@ -29,6 +30,7 @@ class PhotoFeedView: UIViewController, UICollectionViewDelegateFlowLayout {
     var selectedCell: PhotoFeedCell?
     var selectedCellImageViewSnapshot: UIView?
     var animator: Animator?
+    var currentNavigationController: UINavigationController?
     
     lazy var collectionView: UICollectionView = {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()

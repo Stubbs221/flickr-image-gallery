@@ -16,18 +16,20 @@ class FullImageView: UIViewController {
         super.viewDidLoad()
         setupUI()
         guard let data = data else { return }
-        let flickrPhoto = UIImageView()
-        flickrPhoto.kf.setImage(with: data.thumbnailURL)
-        print(data.thumbnailURL)
-        fullImage.image = flickrPhoto.image
+//        let flickrPhoto = UIImageView()
+//        flickrPhoto.kf.setImage(with: data.largeImageURL)
+        print(data.largeImageURL)
+        fullImage.kf.setImage(with: data.thumbnailURL)
         
     }
+    
     
     lazy var fullImage: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.cornerRadius = 15
         imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         return imageView
     }()
     
@@ -49,8 +51,14 @@ class FullImageView: UIViewController {
     lazy var dismissViewButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(systemName: "multiply"), for: .normal)
-        button.tintColor = .white
+//        button.setImage(UIImage(systemName: "chevron.backward"), for: .normal)
+        var configuration = UIButton.Configuration.plain()
+        configuration.image = UIImage(systemName: "chevron.backward", withConfiguration: UIImage.SymbolConfiguration(scale: .large))
+//        configuration.inse
+        
+        
+        button.configuration = configuration
+        button.tintColor = UIColor(named: "color2")
         button.addTarget(self, action: #selector(dismissViewButtonPressed), for: .touchUpInside)
         
         return button

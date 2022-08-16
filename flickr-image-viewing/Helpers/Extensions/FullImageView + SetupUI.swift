@@ -15,22 +15,22 @@ extension FullImageView {
         view.addSubview(titleLabel)
         
         NSLayoutConstraint.activate([
-            fullImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            fullImage.topAnchor.constraint(equalTo: view.topAnchor, constant: 70),
-            fullImage.heightAnchor.constraint(equalToConstant: 300),
-            fullImage.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            fullImage.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            fullImage.topAnchor.constraint(equalTo: view.topAnchor, constant: 90),
+            fullImage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            fullImage.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            fullImage.widthAnchor.constraint(equalToConstant: view.frame.size.width - 20),
+            fullImage.heightAnchor.constraint(equalToConstant: view.frame.size.width - 20)
         ])
         
         NSLayoutConstraint.activate([
-            dismissViewButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
-            dismissViewButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 80)])
+            dismissViewButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            dismissViewButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 50)])
         
         NSLayoutConstraint.activate([
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            titleLabel.topAnchor.constraint(equalTo: fullImage.bottomAnchor, constant: 85),
-            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
-            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
+            titleLabel.topAnchor.constraint(equalTo: fullImage.bottomAnchor, constant: 20),
+            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             titleLabel.heightAnchor.constraint(equalToConstant: 50)])
     }
 }
