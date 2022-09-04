@@ -7,6 +7,7 @@
 
 import UIKit
 import Kingfisher
+import Photos
 
 class FullImageView: UIViewController {
     
@@ -44,6 +45,19 @@ class FullImageView: UIViewController {
         return button
     }()
     
+    lazy var downloadButton: UIButton = {
+        let button = UIButton()
+        let largeConfiguration = UIImage.SymbolConfiguration(pointSize: 30, weight: .regular, scale: .medium)
+        button.translatesAutoresizingMaskIntoConstraints = false
+
+        button.layer.cornerRadius = 15
+        button.setImage(UIImage(systemName: "square.and.arrow.down", withConfiguration: largeConfiguration), for: .normal)
+        button.tintColor = UIColor(named: "color2")
+       
+        button.addTarget(self, action: #selector(downloadButtonPressed), for: .touchUpInside)
+        return button
+    }()
+    
     lazy var dismissViewButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -58,6 +72,37 @@ class FullImageView: UIViewController {
     
     @objc func dismissViewButtonPressed() {
         dismiss(animated: true)
+    }
+    
+    @objc func downloadButtonPressed() {
+        guard let image = fullImage.image else { return }
+        photoAuthorization()
+        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+    }
+    
+    private func photoAuthorization() {
+        
+        let status = PHPhotoLibrary.authorizationStatus(for: .readWrite)
+        
+        switch status {
+        case .notDetermined:
+            PHPhotoLibrary.requestAuthorization(for: .readWrite) { (status) in
+                switch status {
+                case .authorized:
+                    print("success")
+                case .notDetermined, .denied, .limited, .restricted: break
+                @unknown default: break
+                }
+            }
+        case .authorized:
+            print("success")
+        case .restricted:
+            print("Gallery access denied or restricted - go to settings")
+        case .denied:
+            print("Gallery access denied by user with settings")
+        case .limited: break
+        @unknown default: break
+        }
     }
 }
 

@@ -13,6 +13,7 @@ extension FullImageView {
         view.addSubview(fullImage)
         view.addSubview(dismissViewButton)
         view.addSubview(titleLabel)
+        view.addSubview(downloadButton)
         
         NSLayoutConstraint.activate([
             fullImage.topAnchor.constraint(equalTo: view.topAnchor, constant: 90),
@@ -27,10 +28,16 @@ extension FullImageView {
             dismissViewButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 50)])
         
         NSLayoutConstraint.activate([
-            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
             titleLabel.topAnchor.constraint(equalTo: fullImage.bottomAnchor, constant: 20),
             titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            titleLabel.trailingAnchor.constraint(equalTo: downloadButton.leadingAnchor, constant: -10),
             titleLabel.heightAnchor.constraint(equalToConstant: 50)])
+        
+        NSLayoutConstraint.activate([
+            downloadButton.heightAnchor.constraint(equalToConstant: 50),
+            downloadButton.widthAnchor.constraint(equalToConstant: 50),
+            downloadButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            downloadButton.topAnchor.constraint(equalTo: titleLabel.topAnchor, constant: -5)])
     }
 }
